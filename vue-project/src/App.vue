@@ -1,47 +1,49 @@
 <script setup>
-import HelloWorld from './components/HelloWorld.vue'
-import TheWelcome from './components/TheWelcome.vue'
+import { reactive } from "vue";
+const nome = "rodrigo"
+const meuOBJ = {
+  nome: "gian",
+  filmeFavorito: "Rocky"
+}
+
+function dizOla(nome) {
+  return `${nome} diz oi`;
+}
+
+const enderecoDaImagemDoBatman = 'https://images.hdqwalls.com/wallpapers/batman-concept-art-classic-suit-a3.jpg';
+const botaoEstaDesabilitado = false
+
+//let contador = 0
+
+const estado = reactive({
+  contador: 0,
+})
+
+function incrementar () {
+  estado.contador++;
+}
+
+function decrementar () {
+  estado.contador --;
+}
 </script>
 
 <template>
-  <header>
-    <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
+ <h1> {{ dizOla (nome)}}</h1>
+ <img :src="enderecoDaImagemDoBatman" alt="">
+ <button :disabled="botaoEstaDesabilitado"> Enviar mensagem</button>
 
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
-    </div>
-  </header>
+ <br/>
+ <hr/>
 
-  <main>
-    <TheWelcome />
-  </main>
+{{ estado.contador }}
+
+<button @click='incrementar' type="button"> + </button>
+<button @click="decrementar" type="button"> - </button>
 </template>
 
 <style scoped>
-header {
-  line-height: 1.5;
-}
-
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
-}
-
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
-
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
+img {
+  max-width: 200px;
 }
 </style>
